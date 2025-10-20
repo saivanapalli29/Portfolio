@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sai Kumar — DevOps & Cloud Engineer</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Sai Kumar — DevOps & Cloud Engineer. CI/CD, Kubernetes, Terraform, Jenkins, AWS, monitoring, security.">
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1720;
+      --muted:#9aa6b2;
+      --accent:#46c3ff;
+      --accent-2:#8a6cff;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --success: #56d364;
+      --max-width:1100px;
+      --radius:14px;
+      --mono: "Space Grotesk", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      padding:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #061017 0%, #07121a 45%, #041018 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Layout container */
+    .wrap{
+      max-width:var(--max-width);
+      margin:40px auto;
+      padding:28px;
+    }
+
+    /* Top navigation */
+    header{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      top:18px;
+      width:calc(100% - 40px);
+      max-width:var(--max-width);
+      z-index:60;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 16px;
+      border-radius:12px;
+      backdrop-filter: blur(6px) saturate(120%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 6px 22px rgba(2,6,12,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:46px;height:46px;border-radius:10px;
+      display:grid;place-items:center;
+      font-family:var(--mono);
+      font-weight:700;
+      color:var(--bg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px rgba(72,125,255,0.09);
+      transform:translateY(0);
+    }
+    .brand h1{font-size:16px;margin:0;font-weight:700;letter-spacing:0.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 12px;
+      border-radius:10px;
+      transition: all .22s ease;
+      font-size:14px;
+    }
+    nav a.active, nav a:hover{
+      color:#061121;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      box-shadow: 0 6px 18px rgba(72,125,255,0.08);
+      transform:translateY(-1px);
+    }
+
+    /* Hero */
+    .hero{
+      min-height:82vh;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:center;
+      margin-top:26px;
+    }
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr; padding-top:24px}
+    }
+
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:36px;
+      box-shadow: 0 10px 40px rgba(2,8,18,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero .title{
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+    }
+    .hero h2{
+      margin:0;
+      font-size:40px;
+      letter-spacing:-1px;
+      line-height:1;
+      font-weight:800;
+      font-family:var(--mono);
+      color:linear-gradient(90deg,var(--accent),var(--accent-2));
+    }
+    .role{
+      font-weight:600;
+      color:var(--muted);
+      font-size:16px;
+      margin-top:10px;
+    }
+    .summary{
+      margin-top:18px;
+      color:#cfe8ff;
+      font-size:15px;
+    }
+
+    /* Quick contact card */
+    .contact-card{
+      background: linear-gradient(180deg, rgba(9,19,28,0.6), rgba(12,22,32,0.35));
+      border-radius:12px;
+      padding:22px;
+      height:fit-content;
+      border:1px solid rgba(255,255,255,0.02);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .contact-card h3{margin:0;font-size:14px;color:var(--muted)}
+    .contact-card .big{
+      font-weight:700;
+      font-size:18px;
+      color:#f2fbff;
+    }
+    .links a{
+      display:inline-block;
+      margin-top:8px;
+      font-weight:600;
+      color:var(--accent);
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    /* Sections */
+    section{
+      margin-top:44px;
+      padding:28px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 6px 30px rgba(3,8,14,0.45);
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .section-title h3{
+      margin:0;
+      font-family:var(--mono);
+      letter-spacing:0.6px;
+      color:var(--accent);
+      font-size:18px;
+    }
+    .section-title p{
+      margin:0;color:var(--muted);font-size:13px;
+    }
+
+    /* Experience list */
+    .timeline{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .exp{
+      display:grid;
+      grid-template-columns: 1fr 150px;
+      gap:12px;
+      padding:16px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .exp h4{margin:0;font-size:16px}
+    .exp .meta{color:var(--muted);font-size:13px}
+    .exp p{margin:10px 0 0 0;color:#cfe8ff;font-size:14px}
+
+    /* Projects */
+    .projects-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:16px;
+    }
+    @media (max-width:880px){
+      .projects-grid{grid-template-columns:1fr}
+    }
+    .proj{
+      padding:16px;border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .proj h4{margin:0}
+    .proj .pill{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;margin-top:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061121}
+
+    /* Skills & badges */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{padding:8px 12px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;font-size:13px}
+
+    /* Achievements */
+    .achieve{display:flex;flex-direction:column;gap:8px}
+    .achieve li{color:#cfe8ff;}
+
+    /* Contact form / details */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media (max-width:880px){.contact-grid{grid-template-columns:1fr}}
+    .contact-card-2{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);}
+    .mailto{display:flex;flex-direction:column;gap:10px}
+    .mailto a{color:var(--accent);text-decoration:none;font-weight:700}
+
+    footer{text-align:center;color:var(--muted);margin:36px 0;font-size:13px}
+
+    /* small UI niceties */
+    .muted{color:var(--muted)}
+    .flex{display:flex;gap:12px;align-items:center}
+    .tag{font-size:12px;padding:6px 10px;border-radius:8px;background:var(--glass-2);color:var(--muted)}
+
+    /* Scroll progress and small floating action */
+    #progress{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:54px;height:54px;border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;color:var(--bg);
+      box-shadow: 0 8px 32px rgba(72,125,255,0.16);
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor:pointer;
+      z-index:70;
+    }
+
+    /* small responsive adjustments */
+    @media (max-width:560px){
+      header{padding:10px}
+      .brand h1{font-size:14px}
+      .hero{grid-template-columns:1fr}
+      .hero-card{padding:20px}
+      .logo{width:42px;height:42px}
+    }
+
+    /* subtle entrance animations */
+    .fade-up{opacity:0;transform:translateY(12px);animation:fadeUp .7s forwards}
+    .fade-left{opacity:0;transform:translateX(-12px);animation:fadeLeft .7s forwards}
+    .fade-right{opacity:0;transform:translateX(12px);animation:fadeRight .7s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+    @keyframes fadeLeft{to{opacity:1;transform:none}}
+    @keyframes fadeRight{to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+
+  <header id="topHeader" class="fade-down" aria-hidden="false">
+    <div class="brand">
+      <div class="logo">SK</div>
+      <div>
+        <h1>Sai Kumar</h1>
+        <p>DevOps & Cloud Engineer</p>
+      </div>
+    </div>
+
+    <nav id="nav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="mainWrap" role="main">
+    <!-- HERO -->
+    <section id="home" class="hero" aria-label="Home section">
+      <div class="hero-card fade-up">
+        <div class="title">
+          <div>
+            <h2 style="font-size:36px">Sai Kumar</h2>
+            <div class="role">DevOps & Cloud Engineer</div>
+          </div>
+        </div>
+
+        <div class="summary" style="margin-top:18px">
+          Dedicated and result-driven DevOps Engineer with 4+ years of experience designing, automating, and securing cloud-native environments.
+          Skilled in building CI/CD pipelines, Infrastructure-as-Code, container orchestration, and improving reliability and observability for production systems.
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+          <span class="tag">AWS</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Ansible</span>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;">
+          <a class="pill" href="#projects" style="text-decoration:none;">
+            <div style="padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041021;font-weight:700;">See Projects →</div>
+          </a>
+          <a class="pill" href="#contact" style="text-decoration:none;">
+            <div style="padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700;">Contact</div>
+          </a>
+        </div>
+
+        <div style="margin-top:20px;color:var(--muted);font-size:13px;">
+          Based in Bengaluru, India • Open to opportunities in DevOps, Cloud and SRE roles.
+        </div>
+      </div>
+
+      <aside class="contact-card fade-right" aria-label="Quick contact">
+        <h3>Contact</h3>
+        <div class="big">+91 63029 44397</div>
+        <div class="muted">saikumardevops19@gmail.com</div>
+
+        <div class="links" style="margin-top:10px">
+          <a href="mailto:saikumardevops19@gmail.com">Email me</a> ·
+          <a href="https://github.com/saivanapalli29" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <div style="margin-top:12px" class="muted">Resume (PDF)</div>
+        <div>
+          <a class="links" href="./Sai_Kumar_DevOps.pdf" target="_blank" rel="noopener">Download Resume</a>
+        </div>
+
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="fade-up" aria-label="About section" style="margin-top:14px">
+      <div class="section-title">
+        <h3>About</h3>
+        <p>Profile summary and background</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px">
+        <div>
+          <p>
+            I am a dedicated DevOps Engineer with 4+ years of hands-on experience implementing CI/CD pipelines, Infrastructure as Code,
+            container orchestration and cloud-based solutions. I focus on automation, security, observability and cost optimization while
+            supporting Agile development and fast release cycles.
+          </p>
+
+          <h4 style="margin-top:18px">Technical Skills</h4>
+          <div class="skills" style="margin-top:8px">
+            <div class="skill">AWS</div>
+            <div class="skill">Azure</div>
+            <div class="skill">Kubernetes / EKS</div>
+            <div class="skill">Docker</div>
+            <div class="skill">Terraform</div>
+            <div class="skill">Ansible</div>
+            <div class="skill">Jenkins</div>
+            <div class="skill">Git / GitHub</div>
+            <div class="skill">Prometheus & Grafana</div>
+            <div class="skill">Python / Shell</div>
+            <div class="skill">Nginx, Apache2, Tomcat</div>
+            <div class="skill">Trivy / SonarQube</div>
+          </div>
+
+          <h4 style="margin-top:18px">Education</h4>
+          <div class="muted">Adikavi Nannaya University — Bachelor of Science (2018 — 2021)</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="contact-card-2">
+            <div style="font-weight:700">Quick Facts</div>
+            <div style="margin-top:8px;color:var(--muted)">
+              <div><strong>Location:</strong> Bengaluru, India</div>
+              <div style="margin-top:6px"><strong>Experience:</strong> 4+ years</div>
+              <div style="margin-top:6px"><strong>Open to:</strong> Full-time / Remote / Hybrid</div>
+            </div>
+          </div>
+
+          <div class="contact-card-2">
+            <div style="font-weight:700">Tools & Processes</div>
+            <div style="margin-top:8px;color:var(--muted)">
+              CI/CD pipelines, IaC (Terraform/CloudFormation), Containerization, Helm, ArgoCD, Observability (Prometheus/Grafana/ELK), Cloud security & compliance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="fade-up" aria-label="Experience section">
+      <div class="section-title">
+        <h3>Experience</h3>
+        <p>Professional roles and responsibilities</p>
+      </div>
+
+      <div class="timeline">
+        <div class="exp">
+          <div>
+            <h4>DevOps & Cloud Engineer — Cognizant</h4>
+            <div class="meta">Apr 2022 – Present • Hyderabad, India</div>
+            <p>
+              Working as a DevOps & Cloud Engineer at Cognizant. Responsibilities include designing and implementing CI/CD pipelines,
+              automating infrastructure with Terraform and Ansible, securing containerized workloads (Kubernetes/EKS), and integrating DevSecOps
+              tools into the delivery lifecycle. Implemented observability solutions (Prometheus, Grafana, ELK) and collaborated with InfoSec for compliance.
+            </p>
+          </div>
+          <div class="muted">Current</div>
+        </div>
+
+        <div class="exp">
+          <div>
+            <h4>Jr Cloud Engineer (Internship) — Nine Softech</h4>
+            <div class="meta">Sep 2021 – Mar 2022 • Hyderabad, India</div>
+            <p>
+              Internship role focused on cloud fundamentals, basic IaC with Terraform, containerization with Docker, and assisting with CI/CD pipelines.
+              Gained hands-on exposure to monitoring, security scanning, and deployment automation.
+            </p>
+          </div>
+          <div class="muted">Past</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <h4>Key responsibilities (sample)</h4>
+        <ul style="margin-top:8px;color:#cfe8ff">
+          <li>Design and maintain CI/CD pipelines (Jenkins, GitHub Actions).</li>
+          <li>Provision multi-environment infrastructure using Terraform & CloudFormation.</li>
+          <li>Containerize applications, manage Kubernetes deployments and Helm charts.</li>
+          <li>Integrate security checks (Trivy, SonarQube) into pipelines.</li>
+          <li>Implement monitoring and alerting with Prometheus, Grafana and CloudWatch.</li>
+          <li>Automate backups, disaster recovery and manage IAM/security baselines.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="fade-up" aria-label="Projects section">
+      <div class="section-title">
+        <h3>Projects</h3>
+        <p>Important projects & achievements</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="proj">
+          <h4>DFS (Discover Financial Services)</h4>
+          <div class="pill">Nov 2023 – Present</div>
+          <p style="margin-top:10px;color:#cfe8ff">
+            Client: Cognizant — Led design and automation for a hybrid cloud setup supporting Discover Bank workloads.
+            Implemented CI/CD pipelines (Jenkins & GitHub Actions) with integrated vulnerability scans and code-quality gates.
+            Automated provisioning with Terraform and Ansible while applying security baselines and RBAC policies for Kubernetes.
+            Introduced observability with Prometheus, Grafana & ELK and automated backup and DR policies using AWS S3.
+          </p>
+          <div style="margin-top:10px" class="muted">Responsibilities: Pipeline design, IaC, container security, monitoring, compliance automation.</div>
+        </div>
+
+        <div class="proj">
+          <h4>Time and Space — Digital Advertising Platform (HMR)</h4>
+          <div class="pill">Apr 2022 – Sep 2023</div>
+          <p style="margin-top:10px;color:#cfe8ff">
+            Client: Hyderabad Metro Rail — Built a cloud-based ad management and content delivery platform.
+            Helped with CI/CD automation, containerization, basic Kubernetes rollouts and monitoring dashboards.
+            Worked on Terraforms and Ansible scripts to standardize deployments across environments.
+          </p>
+          <div style="margin-top:10px" class="muted">Responsibilities: CI/CD support, IaC, container orchestration, monitoring.</div>
+        </div>
+
+        <div class="proj">
+          <h4>DevSecOps & Automation Toolkit</h4>
+          <div class="pill">Ongoing</div>
+          <p style="margin-top:10px;color:#cfe8ff">
+            Built scripts and automation for security scanning, log analysis and patch validation. Integrated Trivy and SonarQube into CI pipelines to catch vulnerabilities early.
+            Created small Python utilities to aggregate compliance reports and automate routine audits.
+          </p>
+          <div style="margin-top:10px" class="muted">Tools: Trivy, SonarQube, Python, Jenkins, GitHub Actions.</div>
+        </div>
+
+        <div class="proj">
+          <h4>Containerization & Helm Chart Standardization</h4>
+          <div class="pill">2022 — 2024</div>
+          <p style="margin-top:10px;color:#cfe8ff">
+            Standardized Helm chart structure and release process for microservice deployments, enabling consistent rollouts and easier rollbacks.
+            Applied RBAC, network policies and image scanning before deployment to ensure production readiness.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <h4>Achievements</h4>
+        <ul class="achieve" style="margin-top:8px">
+          <li>Reduced deployment time by 60% through automated CI/CD pipelines using Jenkins, GitHub Actions, Maven and Nexus.</li>
+          <li>Improved application availability to 99.5% by deploying containerized workloads with EKS and leveraging Helm and ArgoCD.</li>
+          <li>Achieved ~20% AWS cost savings via autoscaling, resource right-sizing, and automated cleanup strategies.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="fade-up" aria-label="Contact section">
+      <div class="section-title">
+        <h3>Contact</h3>
+        <p>Get in touch — email, phone or GitHub</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card-2">
+          <div style="font-weight:700">Contact details</div>
+          <div style="margin-top:8px;color:var(--muted)">
+            <div><strong>Phone:</strong> <a class="mailto" href="tel:+916302944397">+91 63029 44397</a></div>
+            <div style="margin-top:6px"><strong>Email:</strong> <a class="mailto" href="mailto:saikumardevops19@gmail.com">saikumardevops19@gmail.com</a></div>
+            <div style="margin-top:6px"><strong>GitHub:</strong> <a class="mailto" href="https://github.com/saivanapalli29" target="_blank" rel="noopener">github.com/saivanapalli29</a></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <small class="muted">Prefer a quick call? Click the phone number above on mobile or dial it from your device.</small>
+          </div>
+        </div>
+
+        <div class="contact-card-2">
+          <div style="font-weight:700">Quick message</div>
+          <p style="margin-top:8px;color:var(--muted)">You can email directly or use the link below to open an email draft.</p>
+          <div style="margin-top:10px">
+            <a href="mailto:saikumardevops19@gmail.com?subject=Hello%20Sai%20Kumar&body=Hi%20Sai,%0A%0AI%20saw%20your%20portfolio%20and%20..." style="text-decoration:none">
+              <div style="padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041021;font-weight:700;display:inline-block">Email Sai</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Sai Kumar • DevOps & Cloud Engineer — Built with ❤️
+    </footer>
+  </main>
+
+  <div id="progress" title="Back to top">▲</div>
+
+  <script>
+    // Fill year
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // Smooth scrolling and active nav highlight
+    const links = document.querySelectorAll('.nav-link');
+    const sections = ['home','about','experience','projects','contact'].map(id=>document.getElementById(id));
+    const offset = 80; // header offset
+    function onScroll(){
+      const scroll = window.scrollY + offset + 10;
+      let current = sections[0].id;
+      for(const sec of sections){
+        if(sec.offsetTop <= scroll) current = sec.id;
+      }
+      links.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    links.forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        const top = target.getBoundingClientRect().top + window.scrollY - 68;
+        window.scrollTo({top, behavior:'smooth'});
+      });
+    });
+
+    // small progress button -> top
+    const progress = document.getElementById('progress');
+    progress.addEventListener('click', ()=> {
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+    // show progress button only after scroll
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 300){
+        progress.style.transform = 'translateY(0)';
+        progress.style.opacity = '1';
+      } else {
+        progress.style.transform = 'translateY(12px)';
+        progress.style.opacity = '0.0';
+      }
+    }, {passive:true});
+
+    // small entrance animations on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=>{el.style.animationDelay = (i*80)+'ms'});
+      document.querySelectorAll('.fade-left').forEach((el,i)=>{el.style.animationDelay = (i*80)+'ms'});
+      document.querySelectorAll('.fade-right').forEach((el,i)=>{el.style.animationDelay = (i*80)+'ms'});
+    });
+
+    // Resume download helper - we'll create a small PDF link inline
+    function downloadResume(){
+      // Since we don't have an uploaded public URL in this single-file, open mailto as fallback
+      // If you have a resume URL, replace the href below with that link.
+      // Example: window.open('https://yourdomain.com/Sai_Kumar_DevOps.pdf', '_blank');
+      alert('If you want a direct resume download, upload your resume (PDF) in the same folder or provide a URL. For now the contact links will let people request it via email.');
+    }
+
+    // Accessibility: keyboard for nav
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Home') window.scrollTo({top:0,behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>
